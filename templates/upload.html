@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2 class="mb-4">
+        Upload Resume
+    </h2>
+
+    <div class="card shadow p-5">
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <!-- Resume Upload -->
+            <div class="mb-4">
+                <label class="form-label">
+                    Resume (PDF)
+                </label>
+
+                <input
+                    type="file"
+                    class="form-control"
+                    name="resume"
+                    accept=".pdf"
+                    required>
+            </div>
+
+            <!-- Job Title -->
+            <div class="mb-4">
+                <label class="form-label">
+                    Job Title
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    name="job_title"
+                    placeholder="Software Developer"
+                    required>
+            </div>
+
+            <!-- Experience -->
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Experience Required
+                </label>
+
+                <select class="form-select" name="experience">
+
+                    <option>Fresher</option>
+                    <option>1 Year</option>
+                    <option>2 Years</option>
+                    <option>3 Years</option>
+                    <option>5+ Years</option>
+
+                </select>
+
+            </div>
+
+            <!-- Education -->
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Education
+                </label>
+
+                <select class="form-select" name="education">
+
+                    <option>B.Tech</option>
+                    <option>B.E</option>
+                    <option>BCA</option>
+                    <option>MCA</option>
+                    <option>M.Tech</option>
+                    <option>Diploma</option>
+
+                </select>
+
+            </div>
+
+            <!-- Skills -->
+
+            <h5 class="mb-3">
+
+                Required Skills
+
+            </h5>
+
+            <div class="row">
+
+                <div class="col-md-3 mb-2">
+                    <input type="checkbox" name="skills" value="Python"> Python
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <input type="checkbox" name="skills" value="Java"> Java
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <input type="checkbox" name="skills" value="HTML"> HTML
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <input type="checkbox" name="skills" value="CSS"> CSS
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <input type="checkbox" name="skills" value="JavaScript"> JavaScript
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <input type="checkbox" name="skills" value="Flask"> Flask
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <input type="checkbox" name="skills" value="SQL"> SQL
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <input type="checkbox" name="skills" value="Git"> Git
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <input type="checkbox" name="skills" value="Bootstrap"> Bootstrap
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <input type="checkbox" name="skills" value="React"> React
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <input type="checkbox" name="skills" value="C"> C
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <input type="checkbox" name="skills" value="C++"> C++
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="btn btn-primary btn-lg">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Analyze Resume
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

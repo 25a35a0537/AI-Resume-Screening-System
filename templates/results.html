@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>
+            <i class="fa-solid fa-users"></i>
+            Candidates
+        </h2>
+
+        <a href="/upload" class="btn btn-primary">
+            <i class="fa-solid fa-upload"></i>
+            Upload Resume
+        </a>
+
+    </div>
+
+    <!-- Search -->
+
+    <input
+        type="text"
+        id="search"
+        class="form-control mb-4"
+        placeholder="Search Candidate..."
+        onkeyup="searchCandidate()">
+
+    {% if candidates %}
+
+    <div class="row" id="candidateTable">
+
+    {% for c in candidates %}
+
+        <div class="col-lg-6 mb-4 candidate-card">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h4 class="text-primary">
+
+                                {{ c["name"] }}
+
+                            </h4>
+
+                            <small class="text-muted">
+
+                                {{ c["email"] }}
+
+                            </small>
+
+                        </div>
+
+                        <span class="badge bg-success fs-6">
+
+                            {{ c["score"] }}%
+
+                        </span>
+
+                    </div>
+
+                    <hr>
+
+                    <p>
+
+                        <strong>📞 Phone :</strong>
+
+                        {{ c["phone"] }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>💼 Job Title :</strong>
+
+                        {{ c["job_title"] }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>🎓 Education :</strong>
+
+                        {{ c["required_education"] }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>💼 Experience :</strong>
+
+                        {{ c["required_experience"] }}
+
+                    </p>
+
+                    <hr>
+
+                    <h6>Required Skills</h6>
+
+                    {% for skill in c["required_skills"].split(",") %}
+
+                        <span class="badge bg-dark m-1">
+
+                            {{ skill.strip() }}
+
+                        </span>
+
+                    {% endfor %}
+
+                    <hr>
+
+                    <h6>Candidate Skills</h6>
+
+                    {% for skill in c["skills"].split(",") %}
+
+                        <span class="badge bg-primary m-1">
+
+                            {{ skill.strip() }}
+
+                        </span>
+
+                    {% endfor %}
+
+                    <hr>
+
+                    <p>
+
+                        <strong>Education Details</strong>
+
+                    </p>
+
+                    <p>
+
+                        {{ c["education"] }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Experience Details</strong>
+
+                    </p>
+
+                    <p>
+
+                        {{ c["experience"] }}
+
+                    </p>
+
+                    <hr>
+
+                    <h6>AI Match Score</h6>
+
+                    <div class="progress">
+
+                        <div class="progress-bar bg-success"
+
+                             style="width:{{ c['score'] }}%;">
+
+                            {{ c["score"] }}%
+
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    {% if c["score"] >= 80 %}
+
+                        <span class="badge bg-success">
+
+                            Excellent Match
+
+                        </span>
+
+                    {% elif c["score"] >= 60 %}
+
+                        <span class="badge bg-warning text-dark">
+
+                            Good Match
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-secondary">
+
+                            Under Review
+
+                        </span>
+
+                    {% endif %}
+
+                    <br><br>
+
+                    <a href="/delete/{{ c['id'] }}"
+
+                       class="btn btn-danger btn-sm"
+
+                       onclick="return confirm('Delete this candidate?')">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        Delete
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-warning">
+
+        No candidates found.
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<script>
+
+function searchCandidate(){
+
+    let input=document.getElementById("search").value.toLowerCase();
+
+    let cards=document.querySelectorAll(".candidate-card");
+
+    cards.forEach(function(card){
+
+        let text=card.innerText.toLowerCase();
+
+        if(text.includes(input)){
+
+            card.style.display="block";
+
+        }
+
+        else{
+
+            card.style.display="none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+{% endblock %}

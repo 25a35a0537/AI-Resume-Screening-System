@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>
+            <i class="fa-solid fa-ranking-star"></i>
+            Candidate Ranking
+        </h2>
+
+    </div>
+
+    {% if candidates %}
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Rank</th>
+
+                        <th>Name</th>
+
+                        <th>Email</th>
+
+                        <th>Job Title</th>
+
+                        <th>Score</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for c in candidates %}
+
+                    <tr>
+
+                        <td>
+
+                            {% if loop.index == 1 %}
+                                🥇
+                            {% elif loop.index == 2 %}
+                                🥈
+                            {% elif loop.index == 3 %}
+                                🥉
+                            {% else %}
+                                {{ loop.index }}
+                            {% endif %}
+
+                        </td>
+
+                        <td>{{ c["name"] }}</td>
+
+                        <td>{{ c["email"] }}</td>
+
+                        <td>{{ c["job_title"] }}</td>
+
+                        <td>
+
+                            <span class="badge bg-success">
+
+                                {{ c["score"] }}%
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            {% if c["score"] >= 80 %}
+
+                                <span class="badge bg-success">
+                                    Excellent Match
+                                </span>
+
+                            {% elif c["score"] >= 60 %}
+
+                                <span class="badge bg-warning text-dark">
+                                    Good Match
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-secondary">
+                                    Under Review
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-warning">
+
+        No candidates available.
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
